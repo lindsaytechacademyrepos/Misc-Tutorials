@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <h1></h1>
+
+    <script>
+        function findNb(m) {
+            //array contains ordered list of the VOLUME of each cube
+            var stackOfCubes = new Array();
+            //first cube is 1x1x1
+            stackOfCubes.push(1 ^ 3);
+
+            //calculating current volume of cube stack (sum of array)
+            function reduceEquation(a, b) {
+                return a + b;
+            }
+            function volume(cubeStack) {
+                return cubeStack.reduce(reduceEquation, 0);
+            }
+
+            //next cube to add: volume = (current cube stack height + 1)^3
+            function nextCubeVolume(currentStackHeight) {
+                return (currentStackHeight + 1) ^ 3;
+            }
+
+            var currentVolume = volume(stackOfCubes);
+
+            while (currentVolume < m) {
+                var nextCube = nextCubeVolume(stackOfCubes.length);
+                stackOfCubes.push(nextCube)
+                currentVolume += nextCube;
+            }
+
+            return stackOfCubes[2];
+        }
+
+        alert(findNb(441));
+
+    </script>
+</body>
+</html>
